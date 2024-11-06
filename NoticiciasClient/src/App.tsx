@@ -1,19 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import NoticiasPages from './screens/Noticias/Index'
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { Layout, Menu, Button, Drawer } from 'antd';
+import {
+  MenuOutlined,
+  HomeOutlined,
+  GlobalOutlined,
+  AppstoreAddOutlined, UserOutlined ,UserAddOutlined,NotificationOutlined 
+} from '@ant-design/icons';
+import './App.css';
+import AppInicio from './screens/Inicio/Index';
+
 
 function App() {
-  
+
 
   return (
-    <>
-    
-     <NoticiasPages/>
-    </>
-   
-  )
+   <AppInicio/>
+  );
 }
 
-export default App
+export default App;

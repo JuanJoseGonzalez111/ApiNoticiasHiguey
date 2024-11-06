@@ -17,18 +17,29 @@ public partial class NoticiasProyecttoContext : DbContext
     {
     }
 
+    public virtual DbSet<Categorium> Categoria { get; set; }
+
     public virtual DbSet<Noicia> Noicias { get; set; }
+
+    public virtual DbSet<Pai> Pais { get; set; }
+
+    public virtual DbSet<SolicitudPermiso> SolicitudPermisos { get; set; }
+
+    public virtual DbSet<UserCategorium> UserCategoria { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new Configurations.CategoriumConfiguration());
         modelBuilder.ApplyConfiguration(new Configurations.NoiciaConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.PaiConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.SolicitudPermisoConfiguration());
+        modelBuilder.ApplyConfiguration(new Configurations.UserCategoriumConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
-
 public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) :

@@ -24,4 +24,8 @@ public partial class Noicia
     public string Autor { get; set; }
 
     public DateTime? FechaPublicacion { get; set; }
+
+    public virtual Categorium CategoriaNavigation { get; set; }
+
+    public virtual Pai PaisNavigation { get; set; }
 }

@@ -10,15 +10,14 @@ namespace ApiNoticiasHiguey
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Habilitar CORS con una política específica
+            // Habilitar CORS para permitir un origen específico
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("PermitirFrontend", policy =>
-                {
-                    policy.WithOrigins("http://localhost:5174", "https://localhost:7165")
-                          .AllowAnyHeader()
-                          .AllowAnyMethod();
-                });
+                options.AddPolicy("AllowSpecificOrigin", // Asegúrate de que este nombre coincida al usar la política
+                    builder => builder.WithOrigins("http://localhost:5173") // Cambia esto por el origen de tu frontend
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod()
+                                      .AllowCredentials());
             });
 
             builder.Services.AddControllers();
@@ -54,13 +53,12 @@ namespace ApiNoticiasHiguey
             }
 
             // Usar CORS con la política configurada
-            app.UseCors("PermitirFrontend");
-
+            app.UseCors("AllowSpecificOrigin"); 
             app.UseHttpsRedirection();
-       //     app.UseAuthorization();
+            app.UseAuthorization();
 
             // Registrar los controladores
-            app.MapControllers();
+            app.MapControllers().RequireAuthorization();
 
             app.Run();
         }

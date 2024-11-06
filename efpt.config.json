@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 3,
+   "CodeGenerationMode": 4,
    "ContextClassName": "NoticiasProyecttoContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
@@ -15,7 +15,23 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[dbo].[Categoria]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Noicias]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Pais]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SolicitudPermiso]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserCategoria]",
          "ObjectType": 0
       }
    ],
