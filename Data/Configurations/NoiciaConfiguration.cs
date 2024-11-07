@@ -18,6 +18,7 @@ namespace ApiNoticiasHiguey.Data.Configurations
                 .HasColumnName("autor");
             entity.Property(e => e.Contenido).HasColumnType("text");
             entity.Property(e => e.FechaPublicacion).HasColumnType("date");
+            entity.Property(e => e.Foto).IsUnicode(false);
             entity.Property(e => e.Titulo)
                 .HasMaxLength(200)
                 .IsUnicode(false);

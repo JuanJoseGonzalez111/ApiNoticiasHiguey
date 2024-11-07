@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApiNoticiasHiguey.Models;
 
@@ -11,5 +12,6 @@ public partial class Pai
 
     public string Pais { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Noicia> Noicia { get; set; } = new List<Noicia>();
 }

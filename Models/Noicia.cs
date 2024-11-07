@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApiNoticiasHiguey.Models;
 
@@ -11,15 +12,16 @@ public partial class Noicia
 
     public string Titulo { get; set; }
 
-    public byte[] Foto { get; set; }
+    public string Foto { get; set; }
 
     public string Resumen { get; set; }
 
     public string Contenido { get; set; }
 
     public int? Categoria { get; set; }
-
+    
     public int? Pais { get; set; }
+    
 
     public string Autor { get; set; }
 

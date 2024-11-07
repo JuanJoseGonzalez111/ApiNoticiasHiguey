@@ -3,6 +3,7 @@ import { Form, Input, Button, Upload, DatePicker, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 
 function CrearNoticiaPage() {
+    
     const [titulo, setTitulo] = useState("");
     const [resumen, setResumen] = useState("");
     const [autor, setAutor] = useState("");
@@ -13,6 +14,7 @@ function CrearNoticiaPage() {
     const [foto, setFoto] = useState<File | null>(null);
     const [error, setError] = useState(null);
 
+    // Manejador de la submit (enviar formulario)
     const handleSubmit = async (values: any) => {
         const formData = new FormData();
         formData.append("titulo", values.titulo);
@@ -24,7 +26,14 @@ function CrearNoticiaPage() {
         formData.append("fechaPublicacion", values.fechaPublicacion?.format("YYYY-MM-DD"));
 
         if (foto) {
-            formData.append("foto", foto); // Agrega la imagen si está presente
+            formData.append("Foto", foto); // Asegúrate de que el nombre coincide con lo que espera el backend
+        } else {
+            console.log("No se ha seleccionado ninguna imagen.");
+        }
+
+        // Mostrar contenido de formData para verificación
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
         }
 
         try {
@@ -37,16 +46,22 @@ function CrearNoticiaPage() {
                 throw new Error("Error al crear la noticia");
             }
 
+            const data = await response.json();
             message.success("Noticia creada con éxito");
+
         } catch (err: any) {
             setError(err.message);
             message.error(err.message);
         }
     };
 
-    const handleUploadChange = (info: any) => {
-        if (info.file.status === "done") {
-            setFoto(info.file.originFileObj);
+    const handleUploadChange = (info) => {
+        const file = info.file.originFileObj;
+        if (file) {
+            setFoto(file);
+            console.log("Archivo seleccionado:", file);
+        } else {
+            console.log("No se seleccionó ningún archivo");
         }
     };
 
@@ -76,9 +91,9 @@ function CrearNoticiaPage() {
                     <DatePicker onChange={(date) => setFechaPublicacion(date)} />
                 </Form.Item>
                 <Form.Item label="Foto" name="foto">
-                    <Upload onChange={handleUploadChange} accept="image/*">
-                        <Button icon={<UploadOutlined />}>Subir Foto</Button>
-                    </Upload>
+                   <input type="file" onChange={(e) => setFoto(e.target.files[0])}></input>
+                { foto ? <img alt="Preview" height="60" src={URL.createObjectURL(foto)} /> : null }
+       
                 </Form.Item>
                 {error && <div className="error-message">{error}</div>}
                 <Form.Item>

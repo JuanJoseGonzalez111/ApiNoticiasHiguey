@@ -2,6 +2,7 @@
 #nullable disable
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace ApiNoticiasHiguey.Models;
 
@@ -12,7 +13,7 @@ public partial class Categorium
     public string Nombre { get; set; }
 
     public DateTime? FechaCreacion { get; set; }
-
+    [JsonIgnore]
     public virtual ICollection<Noicia> Noicia { get; set; } = new List<Noicia>();
 
     public virtual ICollection<UserCategorium> UserCategoria { get; set; } = new List<UserCategorium>();

@@ -24,6 +24,9 @@ namespace ApiNoticiasHiguey
             builder.Services.AddAuthorization();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+
 
             // Configuración de bases de datos
             builder.Services.AddDbContext<NoticiasProyecttoContext>(options =>
@@ -36,6 +39,7 @@ namespace ApiNoticiasHiguey
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             var app = builder.Build();
+            app.UseStaticFiles();
 
             // Aplicar migraciones pendientes
             using (var scope = app.Services.CreateScope())
@@ -58,7 +62,7 @@ namespace ApiNoticiasHiguey
             app.UseAuthorization();
 
             // Registrar los controladores
-            app.MapControllers().RequireAuthorization();
+            app.MapControllers();
 
             app.Run();
         }

@@ -58,13 +58,10 @@ function NoticiasPage() {
 
         loadNoticias();
     }, [currentPage, pageSize, searchQuery, category]);
-
-    const convertirABase64 = (bytes) => {
-        return `data:image/jpeg;base64,${btoa(
-            String.fromCharCode(...new Uint8Array(bytes))
-        )}`;
+    const obtenerUrlImagenCompleta = (rutaRelativa) => {
+        return `https://localhost:7165${rutaRelativa}`;
     };
-
+    
     const abrirModalNoticia = (noticia) => {
         setNoticiaSeleccionada(noticia);
         setModalVisible(true);
@@ -120,7 +117,7 @@ function NoticiasPage() {
                             hoverable
                             cover={
                                 <img
-                                    src={convertirABase64(noticia.Foto)}
+                                    src={obtenerUrlImagenCompleta(noticia.fotoUrl)}
                                     alt={noticia.titulo}
                                     className="noticia-imagen"
                                 />
@@ -149,11 +146,12 @@ function NoticiasPage() {
                 >
                     {noticiaSeleccionada && (
                         <>
-                            <img
-                                src={convertirABase64(noticiaSeleccionada.Foto)}
-                                alt={noticiaSeleccionada.titulo}
-                                style={{ width: "100%", marginBottom: "16px" }}
-                            />
+                           <img
+    src={obtenerUrlImagenCompleta(noticiaSeleccionada.fotoUrl)}
+    alt={noticiaSeleccionada.titulo}
+    style={{ width: "50%", height: "auto", marginBottom: "8px", display: "block", margin: "0 auto" }}
+/>
+
                             <Title level={4}>Por {noticiaSeleccionada.autor}</Title>
                             <Text type="secondary">
                                 {noticiaSeleccionada.categoria} - {noticiaSeleccionada.pais}
